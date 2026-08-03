@@ -18,9 +18,9 @@ namespace DVLDPresentationLayer.Applications
     public partial class frmLocalDrivingLicenseApplication : Form
     {
         clslocalLicenseApplication.enMode _Mode;
-        clsApplication Application;
+        clsApplication _application;
         //this use for generate Local License Application
-        int ApplicationID;
+        int applicationID;
         public frmLocalDrivingLicenseApplication()
         {
             InitializeComponent();
@@ -42,19 +42,12 @@ namespace DVLDPresentationLayer.Applications
 
         private bool generateApplicationAndSave()
         {
-            Application = new clsApplication();
+            _application = clsApplication.CreateNewApplication(
+        userControlPersonCardWithFilter1.SelectedPersonID,
+        clsApplicationType.enApplicationType.NewLocalDrivingLicense,
+        clsGlobalUser.CurrentUser.UserID);
 
-            Application.ApplicantPersonID = userControlPersonCardWithFilter1.SelectedPersonID;
-            Application.ApplicationTypeID = (int)clsApplicationType.enApplicationType.NewLocalDrivingLicense;
-            Application.ApplicationStatus = 1;
-            decimal paidFees = clsApplicationType.GetApplicationFees(Application.ApplicationTypeID);
-            Application.PaidFees = paidFees;
-
-            Application.CreatedByUserID = clsGlobalUser.CurrentUser.UserID;
-
-
-
-            if (!Application.Save())
+            if (_application == null)
             {
                 MessageBox.Show(
                     "Failed to generate the main application.",
@@ -65,10 +58,9 @@ namespace DVLDPresentationLayer.Applications
                 return false;
             }
 
-            ApplicationID = Application.ApplicationID;
+            applicationID = _application.ApplicationID;
 
             return true;
-
         }
 
         private bool GenerateLocalLicenseApplicationAndSave()
@@ -76,7 +68,7 @@ namespace DVLDPresentationLayer.Applications
             clslocalLicenseApplication localApplication =
                 new clslocalLicenseApplication();
 
-            localApplication.ApplicationID = ApplicationID;
+            localApplication.ApplicationID = applicationID;
 
             localApplication.LicenseClassID =
                 Convert.ToInt32(comboBoxLicenseClass.SelectedValue);
@@ -129,7 +121,7 @@ namespace DVLDPresentationLayer.Applications
                 return;
 
             MessageBox.Show(
-                $"Application saved successfully.\nApplication ID: {ApplicationID}",
+                $"Application saved successfully.\nApplication ID: {applicationID}",
                 "Saved",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
@@ -153,17 +145,7 @@ namespace DVLDPresentationLayer.Applications
             this.Close();
         }
 
-        private void tabPagePersonalInfo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabControlLocalLicenseApplication_TabIndexChanged(object sender, EventArgs e)
-        {
-            buttonSave.Enabled =
-        tabControlLocalLicenseApplication.SelectedTab ==
-        tabPageApplicationInfo;
-        }
+        
 
         private void tabControlLocalLicenseApplication_SelectedIndexChanged(object sender, EventArgs e)
         {

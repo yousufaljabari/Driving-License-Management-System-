@@ -11,3 +11,6 @@ obj/
 # Build folders
 Debug/
 Release/
+
+
+*.Backup.tmp

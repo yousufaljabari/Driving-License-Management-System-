@@ -11,7 +11,7 @@ namespace DVLDDataAccessLayer
 {
     public class clsLocalLicenseApplicationData
     {
-        public static DataTable GetAllLocalLicenseApplication(string FilterBy="",string FilterValue="")
+        public static DataTable GetAllLocalLicenseApplication(string FilterBy = "", string FilterValue = "")
         {
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsConnectionnSettings.connectionName);
@@ -100,7 +100,7 @@ ORDER BY
             }
             catch (Exception ex)
             {
-                
+
             }
             finally
             {
@@ -114,8 +114,8 @@ ORDER BY
             int localDrivingLicenseApplicationID = -1;
 
             SqlConnection connection = new SqlConnection(clsConnectionnSettings.connectionName);
-            
-                string query = @"
+
+            string query = @"
             INSERT INTO LocalDrivingLicenseApplications
             (
                 ApplicationID,
@@ -130,35 +130,35 @@ ORDER BY
             SELECT SCOPE_IDENTITY();";
 
             SqlCommand command = new SqlCommand(query, connection);
-             
-                    command.Parameters.AddWithValue(
-                        "@ApplicationID",
-                        applicationID);
 
-                    command.Parameters.AddWithValue(
-                        "@LicenseClassID",
-                        licenseClassID);
+            command.Parameters.AddWithValue(
+                "@ApplicationID",
+                applicationID);
 
-                    try
-                    {
-                        connection.Open();
+            command.Parameters.AddWithValue(
+                "@LicenseClassID",
+                licenseClassID);
 
-                        object result = command.ExecuteScalar();
+            try
+            {
+                connection.Open();
 
-                        if (result != null &&
-                            int.TryParse(result.ToString(), out int insertedID))
-                        {
-                            localDrivingLicenseApplicationID = insertedID;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        localDrivingLicenseApplicationID = -1;
-                    }
+                object result = command.ExecuteScalar();
+
+                if (result != null &&
+                    int.TryParse(result.ToString(), out int insertedID))
+                {
+                    localDrivingLicenseApplicationID = insertedID;
+                }
+            }
+            catch (Exception ex)
+            {
+                localDrivingLicenseApplicationID = -1;
+            }
 
             return localDrivingLicenseApplicationID;
         }
-        public static bool DoesHaveActiveApplicationForLicenseClass(  int personID,int licenseClassID)
+        public static bool DoesHaveActiveApplicationForLicenseClass(int personID, int licenseClassID)
         {
             bool isFound = false;
 

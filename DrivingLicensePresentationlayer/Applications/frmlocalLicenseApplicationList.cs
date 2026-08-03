@@ -11,9 +11,9 @@ using DVLDBusinessLayer;
 
 namespace DVLDPresentationLayer.Applications
 {
-    public partial class frmlocalLicenseApplication : Form
+    public partial class frmlocalLicenseApplicationList : Form
     {
-        public frmlocalLicenseApplication()
+        public frmlocalLicenseApplicationList()
         {
             InitializeComponent();
         }
@@ -121,6 +121,50 @@ namespace DVLDPresentationLayer.Applications
         {
             frmLocalDrivingLicenseApplication frm = new frmLocalDrivingLicenseApplication();
             frm.ShowDialog();
+        }
+
+        private void toolStripSeperatior_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private  void _refreshList()
+        {
+            GetAlllocalLicenseApplication();
+        }
+        private void toolStripCancelApplication_Click(object sender, EventArgs e)
+        {
+            int LocalDrivingLicenseApplicationID = Convert.ToInt32(dataGridViewlocalDrivinglicenseApplication.CurrentRow.Cells["L.D.L.AppID"].Value);
+            DialogResult result = MessageBox.Show(
+        "Are you sure you want to cancel this application?",
+        "Confirm Cancellation",
+        MessageBoxButtons.YesNo,
+         MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+
+            if (clsApplication.CancelApplication(LocalDrivingLicenseApplicationID))
+            {
+                MessageBox.Show(
+             "Application cancelled successfully.",
+             "Cancelled",
+             MessageBoxButtons.OK,
+             MessageBoxIcon.Information);
+
+                _refreshList();
+            }
+            else
+            {
+                MessageBox.Show(
+            "The application could not be cancelled. " +
+            "It may already be cancelled or completed.",
+            "Cancellation Failed",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Warning);
+            }
+
         }
     }
 }

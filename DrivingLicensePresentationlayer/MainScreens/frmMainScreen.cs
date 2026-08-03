@@ -78,7 +78,7 @@ namespace DrivingLicenseMangement
 
         private void localDrivingLicenseApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmlocalLicenseApplication frm = new frmlocalLicenseApplication();
+            frmlocalLicenseApplicationList frm = new frmlocalLicenseApplicationList();
             frm.ShowDialog();
         }
     }

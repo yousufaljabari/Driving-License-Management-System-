@@ -71,7 +71,53 @@ namespace DVLDDataAccessLayer
 
             return ApplicationID;
         }
+
+        public static bool CancelApplication(int LocalDrivingLicenseApplicationID)
+        {
+            int RowAffected = 0;
+
+            string query = @"
+
+              UPDATE A
+        SET A.ApplicationStatus = 2
+        FROM dbo.Applications AS A
+        INNER JOIN dbo.LocalDrivingLicenseApplications AS LDA
+            ON A.ApplicationID = LDA.ApplicationID
+        WHERE LDA.LocalDrivingLicenseApplicationID =
+              @LocalDrivingLicenseApplicationID
+          AND A.ApplicationStatus = 1;
+
+
+
+";
+
+            // using automatically closes and disposes the connection,
+            // even if an exception occurs.
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionnSettings.connectionName))
+            {
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+                    try
+                    {
+                        connection.Open();
+                        RowAffected = command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        return false;
+                    }
+
+                }
+
+
+            }
+            return RowAffected > 0;
+        }
+
     }
 
- }
+}
 

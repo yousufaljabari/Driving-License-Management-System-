@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using DVLDDataAccessLayer;
+using static DVLDBusinessLayer.clsApplicationType;
 
 namespace DVLDBusinessLayer
 {
@@ -46,6 +47,31 @@ namespace DVLDBusinessLayer
 
         }
 
+        public static clsApplication CreateNewApplication(int applicantPersonID, enApplicationType applicationType,
+         int createdByUserID)
+        {
+            clsApplication application = new clsApplication();
+
+            application.ApplicantPersonID = applicantPersonID;
+            application.ApplicationTypeID = (int)applicationType;
+            application.ApplicationStatus = 1;
+
+            application.PaidFees =
+                clsApplicationType.GetApplicationFees(
+                    application.ApplicationTypeID);
+
+            application.CreatedByUserID = createdByUserID;
+
+            if (!application.Save())
+                return null;
+
+            return application;
+        }
+
+        public static bool CancelApplication(int LocalDrivingLicenseApplicationID)
+        {
+            return clsApplicationData.CancelApplication(LocalDrivingLicenseApplicationID);
+        }
 
         public bool Save()
         {
