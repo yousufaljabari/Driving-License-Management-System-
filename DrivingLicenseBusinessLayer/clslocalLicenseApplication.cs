@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using DVLDDataAccessLayer;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLDBusinessLayer
 {
@@ -27,6 +29,12 @@ namespace DVLDBusinessLayer
             LicenseClassID = -1;
 
             Mode = enMode.Add;
+        }
+        public clslocalLicenseApplication(int LocalDrivingLicenseApplicationID, int ApplicationID, int LicenseClassID)
+        {
+            this.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
+            this.ApplicationID = ApplicationID;
+            this.LicenseClassID = LicenseClassID;
         }
 
         public static DataTable GetAllLocalLicenseApplication(string FilterBy = "", string FilterValue = "")
@@ -74,6 +82,25 @@ namespace DVLDBusinessLayer
                 .DoesHaveActiveApplicationForLicenseClass(
                     personID,
                     licenseClassID);
+        }
+
+        public static clslocalLicenseApplication Find(int LocalDrivingLicenseApplicationID)
+        {
+            int ApplicationID=-1;
+            int LicenseClassID=-1;
+
+            if (clsLocalLicenseApplicationData.GetLocalDrivingLicenseApplicationInfoByID(LocalDrivingLicenseApplicationID, ref ApplicationID, ref LicenseClassID))
+            {
+                return new clslocalLicenseApplication(LocalDrivingLicenseApplicationID, ApplicationID, LicenseClassID);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public static int PassedTest(int LocalDrivingLicenseApplicationID)
+        {
+            return clsLocalLicenseApplicationData.GetPassedTest(LocalDrivingLicenseApplicationID);   
         }
     }
 }

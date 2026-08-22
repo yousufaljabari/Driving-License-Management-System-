@@ -14,5 +14,10 @@ namespace DVLDBusinessLayer
         {
             return clsLicenseClassData.GetAllLicenseClasses();
         }
+
+        public static string GetClassName(int localDrivingLicenseApplicationID)
+        {
+            return clsLicenseClassData.GetClassName(localDrivingLicenseApplicationID)
+;        }
     }
 }

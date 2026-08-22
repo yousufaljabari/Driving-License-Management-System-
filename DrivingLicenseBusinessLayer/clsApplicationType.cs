@@ -70,7 +70,12 @@ namespace DVLDBusinessLayer
         {
             return clsApplicationTypeData.GetApplicationFees(applicationTypeID);
         }
+        public static String GetApplicationTypeName(int ApplicationTypeID)
+        {
 
+            return clsApplicationTypeData.GetApplicationTypeName(ApplicationTypeID);
+
+        }
         public bool Save()
         {
             if (_Mode == enMode.Update)

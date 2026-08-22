@@ -12,11 +12,11 @@ using DVLDBusinessLayer;
 
 namespace DVLDPresentationLayer.MainScreens
 {
-    
+
     public partial class frmUserLoginScreen : Form
     {
 
-        
+
 
         public frmUserLoginScreen()
         {
@@ -28,10 +28,16 @@ namespace DVLDPresentationLayer.MainScreens
 
         private void UserLoginScreen_Load(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.RememberMe)
+
+            string username = "";
+            string password = "";
+
+            if (clsSaveUsernameAndPassword.GetLoginInfo(ref username, ref password)
+                && !string.IsNullOrEmpty(username)
+                && !string.IsNullOrEmpty(password))
             {
-                textBoxUserName.Text = Properties.Settings.Default.Username;
-                textBoxPassword.Text = Properties.Settings.Default.Password;
+                textBoxUserName.Text = username;
+                textBoxPassword.Text = password;
                 checkboxRememberme.Checked = true;
             }
             else
@@ -40,39 +46,106 @@ namespace DVLDPresentationLayer.MainScreens
                 textBoxPassword.Text = "";
                 checkboxRememberme.Checked = false;
             }
+            /* if (Properties.Settings.Default.RememberMe)
+             {
+                 textBoxUserName.Text = Properties.Settings.Default.Username;
+                 textBoxPassword.Text = Properties.Settings.Default.Password;
+                 checkboxRememberme.Checked = true;
+             }
+             else
+             {
+                 textBoxUserName.Text = "";
+                 textBoxPassword.Text = "";
+                 checkboxRememberme.Checked = false;
+             }*/
         }
 
+        //    private void buttonLogin_Click(object sender, EventArgs e)
+        //    {
+
+        //        string Username = textBoxUserName.Text.Trim();
+        //        string Password = textBoxPassword.Text.Trim();
+        //        if (Username!=null && Password!=null)
+        //        {
+
+        //            if ( clsUserInfo.checkUserLogin(Username,Password))
+        //            {
+        //                Properties.Settings.Default.RememberMe = checkboxRememberme.Checked;
+        //                Properties.Settings.Default.Username = Username;
+        //                Properties.Settings.Default.Password = Password;
+        //                Properties.Settings.Default.Save();
+
+        //                int _UserCurrentID = clsUserInfo.GetUserIDByUsernameAndPassword(Username, Password);
+        //                clsGlobalUser.CurrentUser = clsUserInfo.Find(_UserCurrentID);
+        //                frmMainScreen frm = new frmMainScreen(this);
+        //                this.Hide();
+        //                frm.ShowDialog();
+
+        //            }
+        //            else
+        //            {
+        //                Properties.Settings.Default.RememberMe = false;
+        //                Properties.Settings.Default.Username = "";
+        //                Properties.Settings.Default.Password = "";
+        //                Properties.Settings.Default.Save();
+        //                MessageBox.Show("Invalid Username/Password Or Not Active ","Wrong Credintials",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+        //            }
+
+        //        }
+        //    }
+
+        // Save UserName and Password ( Windows Registry)
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            
             string Username = textBoxUserName.Text.Trim();
             string Password = textBoxPassword.Text.Trim();
-            if (Username!=null && Password!=null)
+
+            if (!string.IsNullOrWhiteSpace(Username) &&
+                !string.IsNullOrWhiteSpace(Password))
             {
-                
-                if ( clsUserInfo.checkUserLogin(Username,Password))
+                if (clsUserInfo.checkUserLogin(Username, Password))
                 {
-                    Properties.Settings.Default.RememberMe = checkboxRememberme.Checked;
-                    Properties.Settings.Default.Username = Username;
-                    Properties.Settings.Default.Password = Password;
-                    Properties.Settings.Default.Save();
-                    
-                    int _UserCurrentID = clsUserInfo.GetUserIDByUsernameAndPassword(Username, Password);
-                    clsGlobalUser.CurrentUser = clsUserInfo.Find(_UserCurrentID);
-                    frmMainScreen frm = new frmMainScreen(this);
+                    if (checkboxRememberme.Checked)
+                    {
+                        clsSaveUsernameAndPassword.SaveLoginInfo(
+                            Username,
+                            Password);
+                    }
+                    else
+                    {
+                        clsSaveUsernameAndPassword.ClearLoginInfo();
+                    }
+
+                    int _UserCurrentID =
+                        clsUserInfo.GetUserIDByUsernameAndPassword(
+                            Username,
+                            Password);
+
+                    clsGlobalUser.CurrentUser =
+                        clsUserInfo.Find(_UserCurrentID);
+
+                    frmMainScreen frm =
+                        new frmMainScreen(this);
+
                     this.Hide();
                     frm.ShowDialog();
-                   
                 }
                 else
                 {
-                    Properties.Settings.Default.RememberMe = false;
-                    Properties.Settings.Default.Username = "";
-                    Properties.Settings.Default.Password = "";
-                    Properties.Settings.Default.Save();
-                    MessageBox.Show("Invalid Username/Password Or Not Active ","Wrong Credintials",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    MessageBox.Show(
+                        "Invalid Username/Password Or Not Active",
+                        "Wrong Credentials",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                 }
-
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Please enter Username and Password.",
+                    "Missing Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
         }
     }

@@ -16,6 +16,8 @@ namespace DVLDBusinessLayer
 
         public int ApplicantPersonID { get; set; }
 
+        public string ApplicantFullName { get; set; }
+
         public DateTime ApplicationDate { get; set; }
 
         public int ApplicationTypeID { get; set; }
@@ -39,7 +41,19 @@ namespace DVLDBusinessLayer
             CreatedByUserID = 0;
         }
 
-         private bool GenerateApplication()
+        public clsApplication(int applicationID, int applicantPersonID,string applicantFullName,
+         DateTime applicationDate, int applicationTypeID,byte applicationStatus,  DateTime lastStatusDate, decimal paidFees)
+        {
+            ApplicationID = applicationID;
+            ApplicantPersonID = applicantPersonID;
+            ApplicantFullName = applicantFullName;
+            ApplicationDate = applicationDate;
+            ApplicationTypeID = applicationTypeID;
+            ApplicationStatus = applicationStatus;
+            LastStatusDate = lastStatusDate;
+            PaidFees = paidFees;
+        }
+        private bool GenerateApplication()
         {
             this.ApplicationID = clsApplicationData.generateApplication(this.ApplicantPersonID, this.ApplicationDate, this.ApplicationTypeID, this.ApplicationStatus
                 , this.LastStatusDate, this.PaidFees, this.CreatedByUserID);
@@ -73,6 +87,7 @@ namespace DVLDBusinessLayer
             return clsApplicationData.CancelApplication(LocalDrivingLicenseApplicationID);
         }
 
+        
         public bool Save()
         {
             if(GenerateApplication())
@@ -83,6 +98,37 @@ namespace DVLDBusinessLayer
             {
                 return false;
             }
+        }
+
+        public static clsApplication FindByLocalDrivingLicenseApplicationID(
+    int localDrivingLicenseApplicationID)
+        {
+            int applicationID = -1;
+            int applicantPersonID = -1;
+            string applicantFullName = "";
+            DateTime applicationDate = DateTime.MinValue;
+            int applicationTypeID = -1;
+            byte applicationStatus = 0;
+            DateTime lastStatusDate = DateTime.MinValue;
+            decimal paidFees = 0;
+
+            if (clsApplicationData.GetApplicationInfoByLocalDrivingLicenseApplicationID(localDrivingLicenseApplicationID,ref applicationID,ref applicantPersonID,
+                   ref applicantFullName,ref applicationDate,ref applicationTypeID,
+                   ref applicationStatus,ref lastStatusDate,ref paidFees))
+            {
+                return new clsApplication(
+                    applicationID,
+                    applicantPersonID,
+                    applicantFullName,
+                    applicationDate,
+                    applicationTypeID,
+                    applicationStatus,
+                    lastStatusDate,
+                    paidFees
+                );
+            }
+
+            return null;
         }
     }
 }

@@ -78,14 +78,16 @@ namespace DVLDDataAccessLayer
 
             string query = @"
 
-              UPDATE A
-        SET A.ApplicationStatus = 2
-        FROM dbo.Applications AS A
-        INNER JOIN dbo.LocalDrivingLicenseApplications AS LDA
-            ON A.ApplicationID = LDA.ApplicationID
-        WHERE LDA.LocalDrivingLicenseApplicationID =
-              @LocalDrivingLicenseApplicationID
-          AND A.ApplicationStatus = 1;
+            UPDATE A 
+SET 
+    A.ApplicationStatus = 2,
+    A.LastStatusDate = GETDATE()
+FROM dbo.Applications AS A 
+INNER JOIN dbo.LocalDrivingLicenseApplications AS LDA 
+    ON A.ApplicationID = LDA.ApplicationID 
+WHERE LDA.LocalDrivingLicenseApplicationID = 
+      @LocalDrivingLicenseApplicationID 
+  AND A.ApplicationStatus = 1;
 
 
 
@@ -117,7 +119,103 @@ namespace DVLDDataAccessLayer
             return RowAffected > 0;
         }
 
+        public static bool GetApplicationInfoByLocalDrivingLicenseApplicationID(
+    int localDrivingLicenseApplicationID,
+    ref int applicationID,
+    ref int applicantPersonID,
+    ref string fullName,
+    ref DateTime applicationDate,
+    ref int applicationTypeID,
+    ref byte applicationStatus,
+    ref DateTime lastStatusDate,
+    ref decimal paidFees)
+        {
+            bool isFound = false;
+
+            string query = @"
+        SELECT
+            App.ApplicationID,
+            App.ApplicantPersonID,
+            CONCAT(
+                P.FirstName, ' ',
+                P.SecondName, ' ',
+                P.ThirdName, ' ',
+                P.LastName
+            ) AS FullName,
+            App.ApplicationDate,
+            App.ApplicationTypeID,
+            App.ApplicationStatus,
+            App.LastStatusDate,
+            App.PaidFees
+
+        FROM Applications AS App
+
+        INNER JOIN LocalDrivingLicenseApplications AS LDLA
+            ON App.ApplicationID = LDLA.ApplicationID
+
+        INNER JOIN People AS P
+            ON App.ApplicantPersonID = P.PersonID
+
+        WHERE LDLA.LocalDrivingLicenseApplicationID =
+              @LocalDrivingLicenseApplicationID;";
+
+            using (SqlConnection connection =
+                new SqlConnection(clsConnectionnSettings.connectionName))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue(
+                        "@LocalDrivingLicenseApplicationID",
+                        localDrivingLicenseApplicationID);
+
+                    try
+                    {
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                isFound = true;
+
+                                applicationID =
+                                    Convert.ToInt32(reader["ApplicationID"]);
+
+                                applicantPersonID =
+                                    Convert.ToInt32(reader["ApplicantPersonID"]);
+
+                                fullName =
+                                    Convert.ToString(reader["FullName"]);
+
+                                applicationDate =
+                                    Convert.ToDateTime(reader["ApplicationDate"]);
+
+                                applicationTypeID =
+                                    Convert.ToInt32(reader["ApplicationTypeID"]);
+
+                                applicationStatus =
+                                    Convert.ToByte(reader["ApplicationStatus"]);
+
+                                lastStatusDate =
+                                    Convert.ToDateTime(reader["LastStatusDate"]);
+
+                                paidFees =
+                                    Convert.ToDecimal(reader["PaidFees"]);
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        isFound = false;
+                    }
+                }
+            }
+
+            return isFound;
+        }
+       
     }
+
 
 }
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLDBusinessLayer;
+using DVLDPresentationLayer.Tests;
 
 namespace DVLDPresentationLayer.Applications
 {
@@ -128,7 +129,7 @@ namespace DVLDPresentationLayer.Applications
 
         }
 
-        private  void _refreshList()
+        private void _refreshList()
         {
             GetAlllocalLicenseApplication();
         }
@@ -165,6 +166,13 @@ namespace DVLDPresentationLayer.Applications
             MessageBoxIcon.Warning);
             }
 
+        }
+
+        private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int localDrivingLicenseApplicationID= Convert.ToInt32(dataGridViewlocalDrivinglicenseApplication.CurrentRow.Cells["L.D.L.AppID"].Value);
+            frmVisionTest frm = new frmVisionTest(localDrivingLicenseApplicationID);
+            frm.ShowDialog();
         }
     }
 }

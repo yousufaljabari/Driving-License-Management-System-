@@ -106,6 +106,7 @@ namespace DVLDDataAccessLayer
             return isFound;
 ;        }
 
+
         public static decimal GetApplicationFees(int applicationTypeID)
         {
             decimal fees = -1;
@@ -143,6 +144,37 @@ namespace DVLDDataAccessLayer
 
             return fees;
         }
+        public static string GetApplicationTypeName(int applicationTypeID)
+        {
+            string applicationTypeTitle = "";
+            string query = @"select ApplicationTypeTitle From ApplicationTypes
+        Where ApplicationTypeID=@ApplicationTypeID;";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionnSettings.connectionName))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ApplicationTypeID", applicationTypeID);
+                    try
+                    {
+                        object result = command.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            applicationTypeTitle = result.ToString();
+                            return applicationTypeTitle;
+                        }
+                        return null;
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+
+                }
+            }
+        }
     }
+
 }
 

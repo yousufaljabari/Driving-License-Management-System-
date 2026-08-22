@@ -198,6 +198,87 @@ ORDER BY
 
             return isFound;
         }
+        public static bool GetLocalDrivingLicenseApplicationInfoByID(
+    int localDrivingLicenseApplicationID,
+    ref int applicationID,
+    ref int licenseClassID)
+        {
+            bool isFound = false;
 
+            string query = @"
+        SELECT
+            ApplicationID,
+            LicenseClassID
+        FROM LocalDrivingLicenseApplications
+        WHERE LocalDrivingLicenseApplicationID =
+              @LocalDrivingLicenseApplicationID;";
+
+            using (SqlConnection connection =
+                new SqlConnection(clsConnectionnSettings.connectionName))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue(
+                        "@LocalDrivingLicenseApplicationID",
+                        localDrivingLicenseApplicationID);
+
+                    try
+                    {
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                isFound = true;
+
+                                applicationID =
+                                    Convert.ToInt32(reader["ApplicationID"]);
+
+                                licenseClassID =
+                                    Convert.ToInt32(reader["LicenseClassID"]);
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        isFound = false;
+                    }
+                }
+            }
+
+            return isFound;
+        }
+        public static int GetPassedTest(int LocalDrivingLicenseApplicationID)
+        {
+            int PassedTest = 0;
+            string query = @"SELECT COUNT(*)
+FROM Tests AS T
+INNER JOIN TestAppointments AS TA
+    ON T.TestAppointmentID = TA.TestAppointmentID
+WHERE TA.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID
+  AND T.TestResult = 1;";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionnSettings.connectionName)) 
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query,connection))
+                {
+                    command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+                    try
+                    {
+                        object result = command.ExecuteScalar();
+                        PassedTest = Convert.ToInt32(result);
+                        return PassedTest;
+                    }
+                    catch
+                    {
+                        return -1;
+                    }
+                }
+            }
+            return PassedTest;
+           
+        }
     }
 }

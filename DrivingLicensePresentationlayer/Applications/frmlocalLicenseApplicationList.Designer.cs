@@ -39,12 +39,11 @@
             dataGridViewlocalDrivinglicenseApplication = new DataGridView();
             contextMenuStripLocalLicenseApplicationList = new ContextMenuStrip(components);
             toolStripShowApplicationDetails = new ToolStripMenuItem();
+            toolStripSeperator = new ToolStripSeparator();
             toolStripEditApplication = new ToolStripMenuItem();
             toolStripDeleteApplication = new ToolStripMenuItem();
-            toolStripCancelApplication = new ToolStripMenuItem();
-            comboBoxLocalLicenseFilterBy = new ComboBox();
-            toolStripSeperator = new ToolStripSeparator();
             toolStripSeperatior = new ToolStripSeparator();
+            toolStripCancelApplication = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripSeparator();
             ScheduleTestsToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripSeparator();
@@ -53,6 +52,10 @@
             showLicenseToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem4 = new ToolStripSeparator();
             showPersonLicenseHisotryToolStripMenuItem = new ToolStripMenuItem();
+            comboBoxLocalLicenseFilterBy = new ComboBox();
+            scheduleVisionTestToolStripMenuItem = new ToolStripMenuItem();
+            scheduleWrittenTestToolStripMenuItem = new ToolStripMenuItem();
+            scheduleStreetTestToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLocalDrivingLicenseApplications).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewlocalDrivinglicenseApplication).BeginInit();
             contextMenuStripLocalLicenseApplicationList.SuspendLayout();
@@ -148,6 +151,11 @@
             toolStripShowApplicationDetails.Size = new Size(364, 30);
             toolStripShowApplicationDetails.Text = "Sbow Application Details";
             // 
+            // toolStripSeperator
+            // 
+            toolStripSeperator.Name = "toolStripSeperator";
+            toolStripSeperator.Size = new Size(361, 6);
+            // 
             // toolStripEditApplication
             // 
             toolStripEditApplication.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -164,6 +172,11 @@
             toolStripDeleteApplication.Size = new Size(364, 30);
             toolStripDeleteApplication.Text = "Delete Application";
             // 
+            // toolStripSeperatior
+            // 
+            toolStripSeperatior.Name = "toolStripSeperatior";
+            toolStripSeperatior.Size = new Size(361, 6);
+            // 
             // toolStripCancelApplication
             // 
             toolStripCancelApplication.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -172,6 +185,59 @@
             toolStripCancelApplication.Size = new Size(364, 30);
             toolStripCancelApplication.Text = "Cancel Application";
             toolStripCancelApplication.Click += toolStripCancelApplication_Click;
+            // 
+            // toolStripMenuItem1
+            // 
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(361, 6);
+            // 
+            // ScheduleTestsToolStripMenuItem
+            // 
+            ScheduleTestsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { scheduleVisionTestToolStripMenuItem, scheduleWrittenTestToolStripMenuItem, scheduleStreetTestToolStripMenuItem });
+            ScheduleTestsToolStripMenuItem.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ScheduleTestsToolStripMenuItem.Image = Properties.Resources.Schdule;
+            ScheduleTestsToolStripMenuItem.Name = "ScheduleTestsToolStripMenuItem";
+            ScheduleTestsToolStripMenuItem.Size = new Size(364, 30);
+            ScheduleTestsToolStripMenuItem.Text = "Schedule Test";
+            // 
+            // toolStripMenuItem2
+            // 
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(361, 6);
+            // 
+            // issueDrivingLicenseFirstTimeToolStripMenuItem
+            // 
+            issueDrivingLicenseFirstTimeToolStripMenuItem.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            issueDrivingLicenseFirstTimeToolStripMenuItem.Image = Properties.Resources.icons8_software_license_96;
+            issueDrivingLicenseFirstTimeToolStripMenuItem.Name = "issueDrivingLicenseFirstTimeToolStripMenuItem";
+            issueDrivingLicenseFirstTimeToolStripMenuItem.Size = new Size(364, 30);
+            issueDrivingLicenseFirstTimeToolStripMenuItem.Text = "Issue Driving License (First Time)";
+            // 
+            // toolStripMenuItem3
+            // 
+            toolStripMenuItem3.Name = "toolStripMenuItem3";
+            toolStripMenuItem3.Size = new Size(361, 6);
+            // 
+            // showLicenseToolStripMenuItem
+            // 
+            showLicenseToolStripMenuItem.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            showLicenseToolStripMenuItem.Image = Properties.Resources.icons8_driver_license_96;
+            showLicenseToolStripMenuItem.Name = "showLicenseToolStripMenuItem";
+            showLicenseToolStripMenuItem.Size = new Size(364, 30);
+            showLicenseToolStripMenuItem.Text = "Show License";
+            // 
+            // toolStripMenuItem4
+            // 
+            toolStripMenuItem4.Name = "toolStripMenuItem4";
+            toolStripMenuItem4.Size = new Size(361, 6);
+            // 
+            // showPersonLicenseHisotryToolStripMenuItem
+            // 
+            showPersonLicenseHisotryToolStripMenuItem.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            showPersonLicenseHisotryToolStripMenuItem.Image = Properties.Resources.icons8_activity_history_100;
+            showPersonLicenseHisotryToolStripMenuItem.Name = "showPersonLicenseHisotryToolStripMenuItem";
+            showPersonLicenseHisotryToolStripMenuItem.Size = new Size(364, 30);
+            showPersonLicenseHisotryToolStripMenuItem.Text = "Show Person License Hisotry";
             // 
             // comboBoxLocalLicenseFilterBy
             // 
@@ -185,67 +251,29 @@
             comboBoxLocalLicenseFilterBy.TabIndex = 8;
             comboBoxLocalLicenseFilterBy.SelectedIndexChanged += comboBoxLocalLicenseFilterBy_SelectedIndexChanged;
             // 
-            // toolStripSeperator
+            // scheduleVisionTestToolStripMenuItem
             // 
-            toolStripSeperator.Name = "toolStripSeperator";
-            toolStripSeperator.Size = new Size(357, 6);
+            scheduleVisionTestToolStripMenuItem.Image = Properties.Resources.VisionTest;
+            scheduleVisionTestToolStripMenuItem.Name = "scheduleVisionTestToolStripMenuItem";
+            scheduleVisionTestToolStripMenuItem.Size = new Size(284, 30);
+            scheduleVisionTestToolStripMenuItem.Text = "Schedule Vision Test";
+            scheduleVisionTestToolStripMenuItem.Click += scheduleVisionTestToolStripMenuItem_Click;
             // 
-            // toolStripSeperatior
+            // scheduleWrittenTestToolStripMenuItem
             // 
-            toolStripSeperatior.Name = "toolStripSeperatior";
-            toolStripSeperatior.Size = new Size(357, 6);
+            scheduleWrittenTestToolStripMenuItem.Enabled = false;
+            scheduleWrittenTestToolStripMenuItem.Image = Properties.Resources.WrittenTest;
+            scheduleWrittenTestToolStripMenuItem.Name = "scheduleWrittenTestToolStripMenuItem";
+            scheduleWrittenTestToolStripMenuItem.Size = new Size(284, 30);
+            scheduleWrittenTestToolStripMenuItem.Text = "Schedule Written Test";
             // 
-            // toolStripMenuItem1
+            // scheduleStreetTestToolStripMenuItem
             // 
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(357, 6);
-            // 
-            // ScheduleTestsToolStripMenuItem
-            // 
-            ScheduleTestsToolStripMenuItem.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ScheduleTestsToolStripMenuItem.Image = Properties.Resources.Schdule;
-            ScheduleTestsToolStripMenuItem.Name = "ScheduleTestsToolStripMenuItem";
-            ScheduleTestsToolStripMenuItem.Size = new Size(364, 30);
-            ScheduleTestsToolStripMenuItem.Text = "Schedule Test";
-            // 
-            // toolStripMenuItem2
-            // 
-            toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(357, 6);
-            // 
-            // issueDrivingLicenseFirstTimeToolStripMenuItem
-            // 
-            issueDrivingLicenseFirstTimeToolStripMenuItem.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            issueDrivingLicenseFirstTimeToolStripMenuItem.Image = Properties.Resources.icons8_software_license_96;
-            issueDrivingLicenseFirstTimeToolStripMenuItem.Name = "issueDrivingLicenseFirstTimeToolStripMenuItem";
-            issueDrivingLicenseFirstTimeToolStripMenuItem.Size = new Size(364, 30);
-            issueDrivingLicenseFirstTimeToolStripMenuItem.Text = "Issue Driving License (First Time)";
-            // 
-            // toolStripMenuItem3
-            // 
-            toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(357, 6);
-            // 
-            // showLicenseToolStripMenuItem
-            // 
-            showLicenseToolStripMenuItem.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            showLicenseToolStripMenuItem.Image = Properties.Resources.icons8_driver_license_96;
-            showLicenseToolStripMenuItem.Name = "showLicenseToolStripMenuItem";
-            showLicenseToolStripMenuItem.Size = new Size(364, 30);
-            showLicenseToolStripMenuItem.Text = "Show License";
-            // 
-            // toolStripMenuItem4
-            // 
-            toolStripMenuItem4.Name = "toolStripMenuItem4";
-            toolStripMenuItem4.Size = new Size(357, 6);
-            // 
-            // showPersonLicenseHisotryToolStripMenuItem
-            // 
-            showPersonLicenseHisotryToolStripMenuItem.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            showPersonLicenseHisotryToolStripMenuItem.Image = Properties.Resources.icons8_activity_history_100;
-            showPersonLicenseHisotryToolStripMenuItem.Name = "showPersonLicenseHisotryToolStripMenuItem";
-            showPersonLicenseHisotryToolStripMenuItem.Size = new Size(364, 30);
-            showPersonLicenseHisotryToolStripMenuItem.Text = "Show Person License Hisotry";
+            scheduleStreetTestToolStripMenuItem.Enabled = false;
+            scheduleStreetTestToolStripMenuItem.Image = Properties.Resources.StreetTest;
+            scheduleStreetTestToolStripMenuItem.Name = "scheduleStreetTestToolStripMenuItem";
+            scheduleStreetTestToolStripMenuItem.Size = new Size(284, 30);
+            scheduleStreetTestToolStripMenuItem.Text = "Schedule Street Test";
             // 
             // frmlocalLicenseApplicationList
             // 
@@ -296,5 +324,8 @@
         private ToolStripMenuItem showLicenseToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem4;
         private ToolStripMenuItem showPersonLicenseHisotryToolStripMenuItem;
+        private ToolStripMenuItem scheduleVisionTestToolStripMenuItem;
+        private ToolStripMenuItem scheduleWrittenTestToolStripMenuItem;
+        private ToolStripMenuItem scheduleStreetTestToolStripMenuItem;
     }
 }
