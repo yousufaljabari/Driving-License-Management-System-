@@ -46,6 +46,9 @@
             toolStripCancelApplication = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripSeparator();
             ScheduleTestsToolStripMenuItem = new ToolStripMenuItem();
+            scheduleVisionTestToolStripMenuItem = new ToolStripMenuItem();
+            scheduleWrittenTestToolStripMenuItem = new ToolStripMenuItem();
+            scheduleStreetTestToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripSeparator();
             issueDrivingLicenseFirstTimeToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem3 = new ToolStripSeparator();
@@ -53,9 +56,6 @@
             toolStripMenuItem4 = new ToolStripSeparator();
             showPersonLicenseHisotryToolStripMenuItem = new ToolStripMenuItem();
             comboBoxLocalLicenseFilterBy = new ComboBox();
-            scheduleVisionTestToolStripMenuItem = new ToolStripMenuItem();
-            scheduleWrittenTestToolStripMenuItem = new ToolStripMenuItem();
-            scheduleStreetTestToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLocalDrivingLicenseApplications).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewlocalDrivinglicenseApplication).BeginInit();
             contextMenuStripLocalLicenseApplicationList.SuspendLayout();
@@ -141,7 +141,7 @@
             contextMenuStripLocalLicenseApplicationList.ImageScalingSize = new Size(20, 20);
             contextMenuStripLocalLicenseApplicationList.Items.AddRange(new ToolStripItem[] { toolStripShowApplicationDetails, toolStripSeperator, toolStripEditApplication, toolStripDeleteApplication, toolStripSeperatior, toolStripCancelApplication, toolStripMenuItem1, ScheduleTestsToolStripMenuItem, toolStripMenuItem2, issueDrivingLicenseFirstTimeToolStripMenuItem, toolStripMenuItem3, showLicenseToolStripMenuItem, toolStripMenuItem4, showPersonLicenseHisotryToolStripMenuItem });
             contextMenuStripLocalLicenseApplicationList.Name = "contextMenuStripLocalLicenseApplicationList";
-            contextMenuStripLocalLicenseApplicationList.Size = new Size(365, 308);
+            contextMenuStripLocalLicenseApplicationList.Size = new Size(365, 280);
             // 
             // toolStripShowApplicationDetails
             // 
@@ -199,6 +199,31 @@
             ScheduleTestsToolStripMenuItem.Name = "ScheduleTestsToolStripMenuItem";
             ScheduleTestsToolStripMenuItem.Size = new Size(364, 30);
             ScheduleTestsToolStripMenuItem.Text = "Schedule Test";
+            ScheduleTestsToolStripMenuItem.DropDownOpened += ScheduleTestsToolStripMenuItem_DropDownOpened;
+            // 
+            // scheduleVisionTestToolStripMenuItem
+            // 
+            scheduleVisionTestToolStripMenuItem.Image = Properties.Resources.VisionTest;
+            scheduleVisionTestToolStripMenuItem.Name = "scheduleVisionTestToolStripMenuItem";
+            scheduleVisionTestToolStripMenuItem.Size = new Size(284, 30);
+            scheduleVisionTestToolStripMenuItem.Text = "Schedule Vision Test";
+            scheduleVisionTestToolStripMenuItem.Click += scheduleVisionTestToolStripMenuItem_Click;
+            // 
+            // scheduleWrittenTestToolStripMenuItem
+            // 
+            scheduleWrittenTestToolStripMenuItem.Enabled = false;
+            scheduleWrittenTestToolStripMenuItem.Image = Properties.Resources.WrittenTest;
+            scheduleWrittenTestToolStripMenuItem.Name = "scheduleWrittenTestToolStripMenuItem";
+            scheduleWrittenTestToolStripMenuItem.Size = new Size(284, 30);
+            scheduleWrittenTestToolStripMenuItem.Text = "Schedule Written Test";
+            // 
+            // scheduleStreetTestToolStripMenuItem
+            // 
+            scheduleStreetTestToolStripMenuItem.Enabled = false;
+            scheduleStreetTestToolStripMenuItem.Image = Properties.Resources.StreetTest;
+            scheduleStreetTestToolStripMenuItem.Name = "scheduleStreetTestToolStripMenuItem";
+            scheduleStreetTestToolStripMenuItem.Size = new Size(284, 30);
+            scheduleStreetTestToolStripMenuItem.Text = "Schedule Street Test";
             // 
             // toolStripMenuItem2
             // 
@@ -250,30 +275,6 @@
             comboBoxLocalLicenseFilterBy.Size = new Size(151, 31);
             comboBoxLocalLicenseFilterBy.TabIndex = 8;
             comboBoxLocalLicenseFilterBy.SelectedIndexChanged += comboBoxLocalLicenseFilterBy_SelectedIndexChanged;
-            // 
-            // scheduleVisionTestToolStripMenuItem
-            // 
-            scheduleVisionTestToolStripMenuItem.Image = Properties.Resources.VisionTest;
-            scheduleVisionTestToolStripMenuItem.Name = "scheduleVisionTestToolStripMenuItem";
-            scheduleVisionTestToolStripMenuItem.Size = new Size(284, 30);
-            scheduleVisionTestToolStripMenuItem.Text = "Schedule Vision Test";
-            scheduleVisionTestToolStripMenuItem.Click += scheduleVisionTestToolStripMenuItem_Click;
-            // 
-            // scheduleWrittenTestToolStripMenuItem
-            // 
-            scheduleWrittenTestToolStripMenuItem.Enabled = false;
-            scheduleWrittenTestToolStripMenuItem.Image = Properties.Resources.WrittenTest;
-            scheduleWrittenTestToolStripMenuItem.Name = "scheduleWrittenTestToolStripMenuItem";
-            scheduleWrittenTestToolStripMenuItem.Size = new Size(284, 30);
-            scheduleWrittenTestToolStripMenuItem.Text = "Schedule Written Test";
-            // 
-            // scheduleStreetTestToolStripMenuItem
-            // 
-            scheduleStreetTestToolStripMenuItem.Enabled = false;
-            scheduleStreetTestToolStripMenuItem.Image = Properties.Resources.StreetTest;
-            scheduleStreetTestToolStripMenuItem.Name = "scheduleStreetTestToolStripMenuItem";
-            scheduleStreetTestToolStripMenuItem.Size = new Size(284, 30);
-            scheduleStreetTestToolStripMenuItem.Text = "Schedule Street Test";
             // 
             // frmlocalLicenseApplicationList
             // 

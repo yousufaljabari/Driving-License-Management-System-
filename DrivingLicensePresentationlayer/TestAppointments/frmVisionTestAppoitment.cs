@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace DVLDPresentationLayer.Tests
 {
-    public partial class frmVisionTest : Form
+    public partial class frmVisionTestAppointments : Form
     {
         int _localDrivingLicenseApplicationID;
-        public frmVisionTest()
+        public frmVisionTestAppointments()
         {
             InitializeComponent();
         }
-        public frmVisionTest(int localDrivingLicenseApplicationID)
+        public frmVisionTestAppointments(int localDrivingLicenseApplicationID)
         {
 
             InitializeComponent();

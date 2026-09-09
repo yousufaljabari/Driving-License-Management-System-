@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DVDLDataAccessLayer.ConnestionClass;
+using DVLD_EventsLogs_;
 using Microsoft.Data.SqlClient;
 
 namespace DVLDDataAccessLayer
@@ -30,7 +31,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -58,7 +59,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -102,7 +103,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-
+                clsEventLogs.LogError(ex);
             }
             finally
             {

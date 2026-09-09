@@ -124,11 +124,6 @@ namespace DVLDPresentationLayer.Applications
             frm.ShowDialog();
         }
 
-        private void toolStripSeperatior_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void _refreshList()
         {
             GetAlllocalLicenseApplication();
@@ -170,9 +165,42 @@ namespace DVLDPresentationLayer.Applications
 
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int localDrivingLicenseApplicationID= Convert.ToInt32(dataGridViewlocalDrivinglicenseApplication.CurrentRow.Cells["L.D.L.AppID"].Value);
-            frmVisionTest frm = new frmVisionTest(localDrivingLicenseApplicationID);
+            int localDrivingLicenseApplicationID = Convert.ToInt32(dataGridViewlocalDrivinglicenseApplication.CurrentRow.Cells["L.D.L.AppID"].Value);
+            frmVisionTestAppointments frm = new frmVisionTestAppointments(localDrivingLicenseApplicationID);
             frm.ShowDialog();
+        }
+
+        
+        
+
+        private void ScheduleTestsToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        {
+            int localDrivingLicenseApplicationID = Convert.ToInt32(dataGridViewlocalDrivinglicenseApplication.CurrentRow.Cells["L.D.L.AppID"].Value);
+            int Passedtest = clslocalLicenseApplication.PassedTest(localDrivingLicenseApplicationID);
+            if (Passedtest == 0)
+            {
+                scheduleVisionTestToolStripMenuItem.Enabled = true;
+                scheduleStreetTestToolStripMenuItem.Enabled = false;
+                scheduleWrittenTestToolStripMenuItem.Enabled = false;
+            }
+            else if (Passedtest == 1)
+            {
+                scheduleVisionTestToolStripMenuItem.Enabled = false;
+                scheduleWrittenTestToolStripMenuItem.Enabled = true;
+                scheduleStreetTestToolStripMenuItem.Enabled = false;
+            }
+            else if (Passedtest == 2)
+            {
+                scheduleVisionTestToolStripMenuItem.Enabled = false;
+                scheduleWrittenTestToolStripMenuItem.Enabled = false;
+                scheduleStreetTestToolStripMenuItem.Enabled = true;
+            }
+            else if (Passedtest == 3)
+            {
+                scheduleVisionTestToolStripMenuItem.Enabled = false;
+                scheduleWrittenTestToolStripMenuItem.Enabled = false;
+                scheduleStreetTestToolStripMenuItem.Enabled = false;
+            }
         }
     }
 }

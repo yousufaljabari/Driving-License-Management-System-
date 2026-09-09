@@ -62,6 +62,7 @@ namespace DVLDPresentationLayer.Users.Controls
         }
         public void GetUsersByUserID(int UserID)
         {
+            //Get User By ID 
             DataTable dt = clsUserInfo.GetUserByUserID(UserID);
             UsersFillDataGrid(dt);
         }

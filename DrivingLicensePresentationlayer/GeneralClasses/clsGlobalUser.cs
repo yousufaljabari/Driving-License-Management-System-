@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DVLDBusinessLayer;
 
-namespace DVLDPresentationLayer
+namespace DVLDPresentationLayer.GeneralClasses
 {
     public static class clsGlobalUser
     {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DVDLDataAccessLayer.ConnestionClass;
+using DVLD_EventsLogs_;
 using Microsoft.Data.SqlClient;
 
 namespace DVLDDataAccessLayer
@@ -100,7 +101,7 @@ ORDER BY
             }
             catch (Exception ex)
             {
-
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -153,6 +154,7 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                clsEventLogs.LogError(ex);
                 localDrivingLicenseApplicationID = -1;
             }
 
@@ -187,8 +189,9 @@ ORDER BY
 
                 isFound = result != null;
             }
-            catch
+            catch(Exception ex)
             {
+                clsEventLogs.LogError(ex);
                 isFound = false;
             }
             finally
@@ -240,8 +243,9 @@ ORDER BY
                             }
                         }
                     }
-                    catch
+                    catch(Exception ex)
                     {
+                        clsEventLogs.LogError(ex);
                         isFound = false;
                     }
                 }
@@ -271,8 +275,9 @@ WHERE TA.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID
                         PassedTest = Convert.ToInt32(result);
                         return PassedTest;
                     }
-                    catch
+                    catch(Exception ex)
                     {
+                        clsEventLogs.LogError(ex);
                         return -1;
                     }
                 }

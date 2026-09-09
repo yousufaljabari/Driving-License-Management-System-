@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLDBusinessLayer;
 using DVLDPresentationLayer.PeopleScreens;
+using DVLDPresentationLayer.GeneralClasses;
 
 namespace DVLDPresentationLayer.Applications.Controls
 {
     public partial class ctrlApplicationInfo : UserControl
     {
+        enum enStatus { New = 1, Canceled = 2, Complete = 3 }
         clsApplication _application;
         clslocalLicenseApplication _LocalApplication;
         public ctrlApplicationInfo()
@@ -30,7 +32,22 @@ namespace DVLDPresentationLayer.Applications.Controls
             _LocalApplication = clslocalLicenseApplication.Find(localDrivingLicenseApplicationID);
             // Application Properties
             labelIDResult.Text = _application.ApplicationID.ToString();
-            labelStatusResult.Text = _application.ApplicationStatus.ToString();
+
+            if (_application.ApplicationStatus == Convert.ToByte(enStatus.New))
+            {
+                labelStatusResult.Text ="New";
+            }
+            else if (_application.ApplicationStatus == Convert.ToByte(enStatus.Canceled))
+            {
+                labelStatusResult.Text = "Cancelled";
+            }
+            else if (_application.ApplicationStatus == Convert.ToByte(enStatus.Complete))
+            {
+                labelStatusResult.Text = "Complete";
+            }
+
+
+
             labelFeesResult.Text = _application.PaidFees.ToString();
             labelTypeResult.Text = clsApplicationType.GetApplicationTypeName(_application.ApplicationTypeID);
             labelApplicantResult.Text = _application.ApplicantFullName;
@@ -38,12 +55,13 @@ namespace DVLDPresentationLayer.Applications.Controls
             labelStatusDateResult.Text = _application.LastStatusDate.ToString("yyyy/MM/dd");
             labelCreatedByResult.Text = clsGlobalUser.CurrentUser.UserName;
 
-            // Local Application Properties
+            // Local Application Properties 
 
             labelDLAppIDResult.Text = _LocalApplication.LocalDrivingLicenseApplicationID.ToString();
             labelAppliedForLicenseResult.Text = clsLicenseClass.GetClassName(_LocalApplication.LicenseClassID);
             labelPassedTestResult.Text = clslocalLicenseApplication.PassedTest(localDrivingLicenseApplicationID).ToString() + "/3";
             
+
         }
 
         private void ctrlApplicationInfo_Load(object sender, EventArgs e)

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DVDLDataAccessLayer.ConnestionClass;
+using DVLD_EventsLogs_;
 using Microsoft.Data.SqlClient;
 namespace DVLDDataAccessLayer
 {
@@ -30,7 +31,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                //
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -63,6 +64,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
+                clsEventLogs.LogError(ex);
                 return null;
             }
             finally
@@ -115,7 +117,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error : " + ex.Message);
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -147,7 +149,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -183,7 +185,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -218,7 +220,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -254,7 +256,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -290,7 +292,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -317,7 +319,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                //
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -371,7 +373,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -409,7 +411,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return false;
             }
             finally
@@ -442,7 +444,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                //
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -470,7 +472,7 @@ namespace DVLDDataAccessLayer
             }
             catch (SqlException ex)
             {
-
+                clsEventLogs.LogError(ex);
                 return false;
             }
             finally
@@ -512,7 +514,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                //
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -536,6 +538,7 @@ namespace DVLDDataAccessLayer
             }
             catch(Exception ex)
             {
+                clsEventLogs.LogError(ex);
                 return isFound;
             }
             finally

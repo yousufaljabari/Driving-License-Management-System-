@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLDBusinessLayer;
+using DVLDPresentationLayer.GeneralClasses;
 using DVLDPresentationLayer.People.Controls;
 using Microsoft.VisualBasic;
 using static System.Net.Mime.MediaTypeNames;

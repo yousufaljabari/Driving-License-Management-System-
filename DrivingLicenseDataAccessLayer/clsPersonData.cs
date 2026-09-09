@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Security.Cryptography.X509Certificates;
 using DVDLDataAccessLayer.ConnestionClass;
+using DVLD_EventsLogs_;
 using Microsoft.Data.Sql;
 using Microsoft.Data.SqlClient;
 namespace DVLDDataAccessLayer
@@ -57,7 +58,8 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
+                
             }
             finally
             {
@@ -90,7 +92,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
             }
 
             finally
@@ -127,8 +129,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -158,7 +159,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
             finally
@@ -189,7 +190,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -220,7 +221,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -254,7 +255,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -288,7 +289,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -323,7 +324,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -359,7 +360,7 @@ namespace DVLDDataAccessLayer
 
             catch (Exception ex)
             {
-                Console.WriteLine("Error : " + ex.Message);
+                clsEventLogs.LogError(ex);
             }
 
             finally
@@ -390,7 +391,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -423,7 +424,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                 return null;
             }
 
@@ -504,7 +505,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error : " + ex.Message);
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -581,7 +582,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error : " + ex.Message);
+                clsEventLogs.LogError(ex);
             }
             finally
             {
@@ -641,7 +642,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);  
                 return false;
             }
             finally
@@ -671,7 +672,7 @@ namespace DVLDDataAccessLayer
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                clsEventLogs.LogError(ex);
                
             }
             finally
@@ -701,7 +702,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                //Console.WriteLine("Error: " + ex.Message);
+                clsEventLogs.LogError(ex);
                 HasRows = false;
             }
             finally

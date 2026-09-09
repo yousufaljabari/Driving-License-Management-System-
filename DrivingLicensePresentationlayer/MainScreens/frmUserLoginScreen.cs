@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DrivingLicenseMangement;
+using DVLD_EventsLogs_;
 using DVLDBusinessLayer;
+using DVLDPresentationLayer.GeneralClasses;
 
 namespace DVLDPresentationLayer.MainScreens
 {
@@ -124,6 +126,8 @@ namespace DVLDPresentationLayer.MainScreens
                     clsGlobalUser.CurrentUser =
                         clsUserInfo.Find(_UserCurrentID);
 
+                    clsEventLogs.LogSuccessfulLogin(Username);
+
                     frmMainScreen frm =
                         new frmMainScreen(this);
 
@@ -137,6 +141,8 @@ namespace DVLDPresentationLayer.MainScreens
                         "Wrong Credentials",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
+
+                    clsEventLogs.LogFailedLogin();
                 }
             }
             else

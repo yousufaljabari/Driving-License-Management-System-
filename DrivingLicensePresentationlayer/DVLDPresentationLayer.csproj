@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DrivingLicenseBusinessLayer\DVLDBusinessLayer.csproj" />
+    <ProjectReference Include="..\DVLD_EventsLogs]\DVLD_EventsLogs].csproj" />
   </ItemGroup>
 
   <ItemGroup>
