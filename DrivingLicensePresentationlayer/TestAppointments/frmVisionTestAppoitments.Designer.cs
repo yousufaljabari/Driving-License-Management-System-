@@ -43,9 +43,9 @@
             // 
             // ctrlApplicationInfo1
             // 
-            ctrlApplicationInfo1.Location = new Point(26, 155);
+            ctrlApplicationInfo1.Location = new Point(26, 149);
             ctrlApplicationInfo1.Name = "ctrlApplicationInfo1";
-            ctrlApplicationInfo1.Size = new Size(926, 587);
+            ctrlApplicationInfo1.Size = new Size(920, 576);
             ctrlApplicationInfo1.TabIndex = 0;
             // 
             // label1
@@ -53,7 +53,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.IndianRed;
-            label1.Location = new Point(318, 132);
+            label1.Location = new Point(318, 128);
             label1.Name = "label1";
             label1.Size = new Size(367, 41);
             label1.TabIndex = 1;
@@ -64,26 +64,30 @@
             pictureBoxVisionTest.Image = Properties.Resources.icons8_vision_96;
             pictureBoxVisionTest.Location = new Point(440, 16);
             pictureBoxVisionTest.Name = "pictureBoxVisionTest";
-            pictureBoxVisionTest.Size = new Size(98, 99);
+            pictureBoxVisionTest.Size = new Size(98, 97);
             pictureBoxVisionTest.TabIndex = 2;
             pictureBoxVisionTest.TabStop = false;
             // 
             // dgvAppointments
             // 
+            dgvAppointments.AllowUserToAddRows = false;
+            dgvAppointments.AllowUserToDeleteRows = false;
+            dgvAppointments.AllowUserToOrderColumns = true;
             dgvAppointments.BackgroundColor = SystemColors.ControlLightLight;
             dgvAppointments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAppointments.GridColor = SystemColors.HighlightText;
-            dgvAppointments.Location = new Point(-15, 798);
+            dgvAppointments.Location = new Point(-15, 795);
             dgvAppointments.Name = "dgvAppointments";
+            dgvAppointments.ReadOnly = true;
             dgvAppointments.RowHeadersWidth = 51;
-            dgvAppointments.Size = new Size(967, 187);
+            dgvAppointments.Size = new Size(961, 165);
             dgvAppointments.TabIndex = 3;
             // 
             // lblAppointments
             // 
             lblAppointments.AutoSize = true;
             lblAppointments.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAppointments.Location = new Point(20, 756);
+            lblAppointments.Location = new Point(20, 748);
             lblAppointments.Name = "lblAppointments";
             lblAppointments.Size = new Size(148, 25);
             lblAppointments.TabIndex = 4;
@@ -92,17 +96,18 @@
             // btnAddAppointment
             // 
             btnAddAppointment.Image = Properties.Resources.addTestAppointment;
-            btnAddAppointment.Location = new Point(882, 746);
+            btnAddAppointment.Location = new Point(880, 741);
             btnAddAppointment.Name = "btnAddAppointment";
             btnAddAppointment.Size = new Size(66, 42);
             btnAddAppointment.TabIndex = 5;
             btnAddAppointment.UseVisualStyleBackColor = true;
+            btnAddAppointment.Click += btnAddAppointment_Click;
             // 
             // lblRecords
             // 
             lblRecords.AutoSize = true;
             lblRecords.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblRecords.Location = new Point(20, 1012);
+            lblRecords.Location = new Point(26, 986);
             lblRecords.Name = "lblRecords";
             lblRecords.Size = new Size(111, 25);
             lblRecords.TabIndex = 7;
@@ -112,19 +117,20 @@
             // 
             btnClose.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnClose.Image = Properties.Resources.icons8_close_48;
-            btnClose.Location = new Point(832, 999);
+            btnClose.Location = new Point(792, 974);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(114, 51);
+            btnClose.Size = new Size(143, 51);
             btnClose.TabIndex = 8;
             btnClose.Text = "Close";
             btnClose.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // lblRecordsCount
             // 
             lblRecordsCount.AutoSize = true;
             lblRecordsCount.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblRecordsCount.Location = new Point(134, 1013);
+            lblRecordsCount.Location = new Point(143, 986);
             lblRecordsCount.Name = "lblRecordsCount";
             lblRecordsCount.Size = new Size(22, 25);
             lblRecordsCount.TabIndex = 9;
@@ -134,7 +140,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(953, 1055);
+            ClientSize = new Size(941, 1030);
             Controls.Add(lblRecordsCount);
             Controls.Add(btnClose);
             Controls.Add(lblRecords);

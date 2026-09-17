@@ -30,6 +30,7 @@ namespace DVLDBusinessLayer
 
         public int CreatedByUserID { get; set; }
 
+        
         public clsApplication()
         {
             ApplicantPersonID = 0;

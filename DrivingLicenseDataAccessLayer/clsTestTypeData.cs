@@ -112,6 +112,42 @@ namespace DVLDDataAccessLayer
             return isFound;
             
         }
+        public static decimal GetPaidFeesUsingTestTypeID(int TestTypeID)
+        {
+            decimal PaidFees = 0;
+
+            string query = @"
+        SELECT TestTypeFees
+        FROM TestTypes
+        WHERE TestTypeID = @TestTypeID;";
+
+            using (SqlConnection connection =
+                new SqlConnection(clsConnectionnSettings.connectionName))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+
+                    try
+                    {
+                        connection.Open();
+
+                        object result = command.ExecuteScalar();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            PaidFees = Convert.ToDecimal(result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        clsEventLogs.LogError(ex);
+                    }
+                }
+            }
+
+            return PaidFees;
+        }
 
     }
 }

@@ -18,6 +18,9 @@ namespace DVLDPresentationLayer.Applications.Controls
         enum enStatus { New = 1, Canceled = 2, Complete = 3 }
         clsApplication _application;
         clslocalLicenseApplication _LocalApplication;
+
+       
+
         public ctrlApplicationInfo()
         {
             InitializeComponent();
@@ -69,6 +72,9 @@ namespace DVLDPresentationLayer.Applications.Controls
 
         }
 
+        public string FullName => _application.ApplicantFullName;
+
+        public string DrivingClassName => clsLicenseClass.GetClassName(_LocalApplication.LicenseClassID);
         private void linkViewPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             clsPerson _Person = clsPerson.Find(_application.ApplicantPersonID);

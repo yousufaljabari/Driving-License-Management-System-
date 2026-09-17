@@ -18,7 +18,12 @@ namespace DVLDPresentationLayer.Applications
         {
             InitializeComponent();
         }
+        private void Frm_LocalApplicationSaved(object sender, EventArgs e)
+        {
+            _refreshList();
+        }
         string FilterBy = "";
+
         public void LocalLicenseFillDataGrid(DataTable dt)
         {
             if (dt != null && dt.Rows.Count > 0)
@@ -116,11 +121,13 @@ namespace DVLDPresentationLayer.Applications
         private void frmlocalLicenseApplication_Load(object sender, EventArgs e)
         {
             comboBoxLocalLicenseFilterBy.SelectedIndex = 0;
+            
         }
 
         private void buttonAddNewApplication_Click(object sender, EventArgs e)
         {
             frmLocalDrivingLicenseApplication frm = new frmLocalDrivingLicenseApplication();
+            frm.LocalApplicationSaved += Frm_LocalApplicationSaved;
             frm.ShowDialog();
         }
 

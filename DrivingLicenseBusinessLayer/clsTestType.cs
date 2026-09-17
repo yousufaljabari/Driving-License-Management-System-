@@ -46,6 +46,11 @@ namespace DVLDBusinessLayer
         {
             return clsTestTypeData.UpdateTestType(ID,Title,Description,Fees);
         }
+
+        public static decimal GetPaidFeesUsingTestTypeID(int TestTypeID)
+        {
+            return clsTestTypeData.GetPaidFeesUsingTestTypeID(TestTypeID);
+        }
         public static clsTestType GetTestTypeInfoByID(int ID)
         {
             string Title = "";
@@ -68,6 +73,7 @@ namespace DVLDBusinessLayer
             }
             return false;
         }
+
     }
 }
 

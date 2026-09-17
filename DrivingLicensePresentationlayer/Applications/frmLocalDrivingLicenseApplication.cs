@@ -22,6 +22,11 @@ namespace DVLDPresentationLayer.Applications
         clsApplication _application;
         //this use for generate Local License Application
         int applicationID;
+
+
+        public event EventHandler LocalApplicationSaved; 
+
+
         public frmLocalDrivingLicenseApplication()
         {
             InitializeComponent();
@@ -127,6 +132,7 @@ namespace DVLDPresentationLayer.Applications
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
 
+            LocalApplicationSaved?.Invoke(this, EventArgs.Empty);
             buttonSave.Enabled = false;
         }
 
