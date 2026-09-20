@@ -121,7 +121,7 @@ namespace DVLDPresentationLayer.Applications
         private void frmlocalLicenseApplication_Load(object sender, EventArgs e)
         {
             comboBoxLocalLicenseFilterBy.SelectedIndex = 0;
-            
+
         }
 
         private void buttonAddNewApplication_Click(object sender, EventArgs e)
@@ -177,8 +177,8 @@ namespace DVLDPresentationLayer.Applications
             frm.ShowDialog();
         }
 
-        
-        
+
+
 
         private void ScheduleTestsToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {
@@ -208,6 +208,14 @@ namespace DVLDPresentationLayer.Applications
                 scheduleWrittenTestToolStripMenuItem.Enabled = false;
                 scheduleStreetTestToolStripMenuItem.Enabled = false;
             }
+        }
+
+        private void toolStripShowApplicationDetails_Click(object sender, EventArgs e)
+        {
+            int LocalDrivingLicenseApplicationID= Convert.ToInt32(dataGridViewlocalDrivinglicenseApplication.CurrentRow.Cells["L.D.L.AppID"].Value);
+            frmshowApplicationInfo frm = new frmshowApplicationInfo(LocalDrivingLicenseApplicationID);
+
+            frm.ShowDialog();
         }
     }
 }

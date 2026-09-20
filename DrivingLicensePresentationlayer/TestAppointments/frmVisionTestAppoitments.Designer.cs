@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             ctrlApplicationInfo1 = new DVLDPresentationLayer.Applications.Controls.ctrlApplicationInfo();
             label1 = new Label();
             pictureBoxVisionTest = new PictureBox();
             dgvAppointments = new DataGridView();
+            cmsTestAppointments = new ContextMenuStrip(components);
+            tsmiEditAppointment = new ToolStripMenuItem();
+            tsmiTakeTest = new ToolStripMenuItem();
             lblAppointments = new Label();
             btnAddAppointment = new Button();
             lblRecords = new Label();
@@ -39,6 +43,7 @@
             lblRecordsCount = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxVisionTest).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvAppointments).BeginInit();
+            cmsTestAppointments.SuspendLayout();
             SuspendLayout();
             // 
             // ctrlApplicationInfo1
@@ -75,6 +80,7 @@
             dgvAppointments.AllowUserToOrderColumns = true;
             dgvAppointments.BackgroundColor = SystemColors.ControlLightLight;
             dgvAppointments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAppointments.ContextMenuStrip = cmsTestAppointments;
             dgvAppointments.GridColor = SystemColors.HighlightText;
             dgvAppointments.Location = new Point(-15, 795);
             dgvAppointments.Name = "dgvAppointments";
@@ -82,6 +88,31 @@
             dgvAppointments.RowHeadersWidth = 51;
             dgvAppointments.Size = new Size(961, 165);
             dgvAppointments.TabIndex = 3;
+            // 
+            // cmsTestAppointments
+            // 
+            cmsTestAppointments.ImageScalingSize = new Size(20, 20);
+            cmsTestAppointments.Items.AddRange(new ToolStripItem[] { tsmiEditAppointment, tsmiTakeTest });
+            cmsTestAppointments.Name = "cmsTestAppointments";
+            cmsTestAppointments.Size = new Size(254, 96);
+            cmsTestAppointments.Opening += cmsTestAppointments_Opening;
+            // 
+            // tsmiEditAppointment
+            // 
+            tsmiEditAppointment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            tsmiEditAppointment.Image = Properties.Resources.ApplicationEdit;
+            tsmiEditAppointment.Name = "tsmiEditAppointment";
+            tsmiEditAppointment.Size = new Size(253, 32);
+            tsmiEditAppointment.Text = "Edit Appointment";
+            tsmiEditAppointment.Click += tsmiEditAppointment_Click;
+            // 
+            // tsmiTakeTest
+            // 
+            tsmiTakeTest.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            tsmiTakeTest.Image = Properties.Resources.Schdule;
+            tsmiTakeTest.Name = "tsmiTakeTest";
+            tsmiTakeTest.Size = new Size(253, 32);
+            tsmiTakeTest.Text = "Take Test";
             // 
             // lblAppointments
             // 
@@ -156,6 +187,7 @@
             Load += frmVisionTest_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxVisionTest).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvAppointments).EndInit();
+            cmsTestAppointments.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -171,5 +203,8 @@
         private Label lblRecords;
         private Button btnClose;
         private Label lblRecordsCount;
+        private ContextMenuStrip cmsTestAppointments;
+        private ToolStripMenuItem tsmiEditAppointment;
+        private ToolStripMenuItem tsmiTakeTest;
     }
 }

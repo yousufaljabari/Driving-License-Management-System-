@@ -38,6 +38,19 @@ namespace DVLDBusinessLayer
 
             Mode = enMode.AddNew;
         }
+        private clsTestAppointment(int TestAppointmentID, int LocalDrivingLicenseApplicationID, DateTime AppointmentDate, decimal PaidFees)
+        {
+            
+            this.TestAppointmentID = TestAppointmentID;
+            
+           
+            this.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
+            
+            this.AppointmentDate = AppointmentDate;
+            this.PaidFees = PaidFees;
+
+            Mode = enMode.Update;
+        }
         public static DataTable GetAppointmentsByLocalDrivingLicenseApplicationID(int LocalDrivingLicenseApplicationID)
         {
             return clsTestAppointmentData.GetAppointmentsByLocalDrivingLicenseApplicationID(LocalDrivingLicenseApplicationID);
@@ -56,6 +69,13 @@ namespace DVLDBusinessLayer
 
             return (this.TestAppointmentID != -1);
         }
+        private bool _UpdateTestAppointment()
+        {
+            return clsTestAppointmentData.UpdateTestAppointment(
+                this.TestAppointmentID,
+                this.AppointmentDate
+            );
+        }
 
         public static bool IsThereAnActiveAppointment(
         int LocalDrivingLicenseApplicationID,
@@ -66,19 +86,47 @@ namespace DVLDBusinessLayer
                 TestTypeID);
         }
 
+        public static clsTestAppointment Find(int TestAppointmentID)
+        {
+            int LocalDrivingLicenseApplicationID = -1;
+            DateTime AppointmentDate = DateTime.Now;
+            decimal PaidFees = 0;
+
+            if (clsTestAppointmentData.GetTestAppointmentByID(
+                TestAppointmentID,
+                ref LocalDrivingLicenseApplicationID,
+                ref AppointmentDate,
+                ref PaidFees))
+            {
+                return new clsTestAppointment(
+                    TestAppointmentID,
+                    LocalDrivingLicenseApplicationID,
+                    AppointmentDate,
+                    PaidFees);
+            }
+
+            return null;
+        }
+
         public bool Save()
         {
             switch (Mode)
             {
                 case enMode.AddNew:
-
-                    if (_AddNewTestAppointment())
                     {
-                        Mode = enMode.Update;
-                        return true;
+                        if (_AddNewTestAppointment())
+                        {
+                            Mode = enMode.Update;
+                            return true;
+                        }
+
+                        return false;
                     }
 
-                    return false;
+                case enMode.Update:
+                    {
+                        return _UpdateTestAppointment();
+                    }
             }
 
             return false;

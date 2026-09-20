@@ -159,5 +159,105 @@ WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID;";
 
             return IsFound;
         }
+
+
+        public static bool GetTestAppointmentByID(
+    int TestAppointmentID,
+    ref int LocalDrivingLicenseApplicationID,
+    ref DateTime AppointmentDate,
+    ref decimal PaidFees)
+        {
+            bool IsFound = false;
+
+            string query = @"
+        SELECT 
+            LocalDrivingLicenseApplicationID,
+            AppointmentDate,
+            PaidFees
+        FROM TestAppointments
+        WHERE TestAppointmentID = @TestAppointmentID;";
+
+            using (SqlConnection connection =
+                new SqlConnection(clsConnectionnSettings.connectionName))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue(
+                        "@TestAppointmentID", TestAppointmentID);
+
+                    try
+                    {
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                IsFound = true;
+
+                                LocalDrivingLicenseApplicationID =
+                                    Convert.ToInt32(reader["LocalDrivingLicenseApplicationID"]);
+
+                                AppointmentDate =
+                                    Convert.ToDateTime(reader["AppointmentDate"]);
+
+                                PaidFees =
+                                    Convert.ToDecimal(reader["PaidFees"]);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        clsEventLogs.LogError(ex);
+                        IsFound = false;
+                    }
+                }
+            }
+
+            return IsFound;
+        }
+
+
+        public static bool UpdateTestAppointment(
+    int TestAppointmentID,
+    DateTime AppointmentDate)
+        {
+            int RowsAffected = 0;
+
+            string query = @"
+        UPDATE TestAppointments
+        SET AppointmentDate = @AppointmentDate
+        WHERE TestAppointmentID = @TestAppointmentID;";
+
+            using (SqlConnection connection =
+                new SqlConnection(clsConnectionnSettings.connectionName))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue(
+                        "@TestAppointmentID", TestAppointmentID);
+
+                    command.Parameters.AddWithValue(
+                        "@AppointmentDate", AppointmentDate);
+
+                    try
+                    {
+                        connection.Open();
+
+                        RowsAffected = command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        clsEventLogs.LogError(ex);
+                        return false;
+                    }
+                }
+            }
+
+            return (RowsAffected > 0);
+        }
+
+
     }
+
 }

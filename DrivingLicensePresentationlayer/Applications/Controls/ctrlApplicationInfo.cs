@@ -26,6 +26,8 @@ namespace DVLDPresentationLayer.Applications.Controls
             InitializeComponent();
         }
 
+      
+
         public int localDrivingLicenseApplicationID;
 
         public void LoadLocalApplicationInfo()

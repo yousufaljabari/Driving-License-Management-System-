@@ -74,13 +74,47 @@ namespace DVLDPresentationLayer.Tests
 
             frmAddEditTestAppointment frm = new frmAddEditTestAppointment(_localDrivingLicenseApplicationID, DrivingClassName, FullName, TestTypeID);
 
-             frm.TestAppointmentSaved += Frm_TestAppointmentSaved;
-             frm.ShowDialog();
+            frm.TestAppointmentSaved += Frm_TestAppointmentSaved;
+            frm.ShowDialog();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void tsmiEditAppointment_Click(object sender, EventArgs e)
+        {
+            if (dgvAppointments.CurrentRow == null)
+                return;
+
+            int TestAppointmentID = Convert.ToInt32(
+                dgvAppointments.CurrentRow.Cells["TestAppointmentID"].Value);
+
+            frmAddEditTestAppointment frm =
+                new frmAddEditTestAppointment(
+                    TestAppointmentID,
+                    ctrlApplicationInfo1.DrivingClassName,
+                    ctrlApplicationInfo1.FullName);
+
+            frm.TestAppointmentSaved += Frm_TestAppointmentSaved;
+
+            frm.ShowDialog();
+        }
+
+        private void cmsTestAppointments_Opening(object sender, CancelEventArgs e)
+        {
+            if (dgvAppointments.CurrentRow == null)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            bool IsLocked = Convert.ToBoolean(
+                dgvAppointments.CurrentRow.Cells["IsLocked"].Value);
+
+            tsmiEditAppointment.Enabled = !IsLocked;
+            tsmiTakeTest.Enabled = !IsLocked;
         }
     }
 }

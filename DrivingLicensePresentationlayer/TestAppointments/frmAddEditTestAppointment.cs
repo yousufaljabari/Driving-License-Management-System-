@@ -14,11 +14,11 @@ namespace DVLDPresentationLayer.TestAppointments
 {
     public partial class frmAddEditTestAppointment : Form
     {
-        enum enAddEditTestAppointment { AddNew=0,Update=1};
-        
+        enum enAddEditTestAppointment { AddNew = 0, Update = 1 };
+
         string _FullName;
         string _DrivingClassName;
-        
+
         enAddEditTestAppointment _Mode;
         clsTestAppointment _TestAppointment;
 
@@ -38,39 +38,84 @@ namespace DVLDPresentationLayer.TestAppointments
 
         }
 
+        public frmAddEditTestAppointment(int TestAppointmentID,string DrivingClassName,string FullName)
+        {
+
+          
+            InitializeComponent();
+
+            _Mode = enAddEditTestAppointment.Update;
+
+            _TestAppointment =
+                clsTestAppointment.Find(TestAppointmentID);
+
+            _DrivingClassName = DrivingClassName;
+            _FullName = FullName;
+        
+           
+        }
+
         private void _FillTestAppointmentObject()
         {
+            _TestAppointment.AppointmentDate =
+                ctrlScheduleTest1.AppointmentDate;
 
+            if (_Mode == enAddEditTestAppointment.AddNew)
+            {
+                _TestAppointment.CreatedByUserID =
+                    clsGlobalUser.CurrentUser.UserID;
 
-            _TestAppointment.CreatedByUserID = clsGlobalUser.CurrentUser.UserID;
-            _TestAppointment.IsLocked = false;
-            _TestAppointment.AppointmentDate = ctrlScheduleTest1.AppointmentDate;
+                _TestAppointment.IsLocked = false;
 
-
-            _TestAppointment.RetakeTestApplicationID = null;
+                _TestAppointment.RetakeTestApplicationID = null;
+            }
         }
 
+        private void LoadDataToForm()
+        {
+            if (_TestAppointment == null)
+            {
+                MessageBox.Show(
+                    "Test Appointment was not found.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
 
+                this.Close();
+                return;
+            }
+              int Trials = clsTest.GetTestTrials(
+               _TestAppointment.LocalDrivingLicenseApplicationID,
+               _TestAppointment.TestTypeID);
+
+           ctrlScheduleTest1.RetakeTestEnabled = (Trials > 0);
+            ctrlScheduleTest1.LoadData(_TestAppointment, _DrivingClassName, _FullName);
+
+        }
         private void frmAddEditTestAppointment_Load(object sender, EventArgs e)
         {
-            ctrlScheduleTest1.LoadData(_TestAppointment, _DrivingClassName, _FullName);
+            LoadDataToForm();   
         }
 
-        public bool Save()
+        private bool Save()
         {
             switch (_Mode)
             {
                 case enAddEditTestAppointment.AddNew:
-
                     {
-                        if(_TestAppointment.Save())
+                        if (_TestAppointment.Save())
                         {
                             _Mode = enAddEditTestAppointment.Update;
                             return true;
                         }
+
+                        return false;
                     }
 
-                    return false;
+                case enAddEditTestAppointment.Update:
+                    {
+                        return _TestAppointment.Save();
+                    }
             }
 
             return false;
@@ -103,6 +148,11 @@ namespace DVLDPresentationLayer.TestAppointments
             }
 
 
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

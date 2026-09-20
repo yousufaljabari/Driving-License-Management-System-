@@ -141,7 +141,7 @@
             contextMenuStripLocalLicenseApplicationList.ImageScalingSize = new Size(20, 20);
             contextMenuStripLocalLicenseApplicationList.Items.AddRange(new ToolStripItem[] { toolStripShowApplicationDetails, toolStripSeperator, toolStripEditApplication, toolStripDeleteApplication, toolStripSeperatior, toolStripCancelApplication, toolStripMenuItem1, ScheduleTestsToolStripMenuItem, toolStripMenuItem2, issueDrivingLicenseFirstTimeToolStripMenuItem, toolStripMenuItem3, showLicenseToolStripMenuItem, toolStripMenuItem4, showPersonLicenseHisotryToolStripMenuItem });
             contextMenuStripLocalLicenseApplicationList.Name = "contextMenuStripLocalLicenseApplicationList";
-            contextMenuStripLocalLicenseApplicationList.Size = new Size(365, 280);
+            contextMenuStripLocalLicenseApplicationList.Size = new Size(365, 308);
             // 
             // toolStripShowApplicationDetails
             // 
@@ -150,6 +150,7 @@
             toolStripShowApplicationDetails.Name = "toolStripShowApplicationDetails";
             toolStripShowApplicationDetails.Size = new Size(364, 30);
             toolStripShowApplicationDetails.Text = "Sbow Application Details";
+            toolStripShowApplicationDetails.Click += toolStripShowApplicationDetails_Click;
             // 
             // toolStripSeperator
             // 
